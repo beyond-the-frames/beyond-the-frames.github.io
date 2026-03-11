@@ -1,0 +1,329 @@
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+body {
+	font-family: "Manrope", "Segoe UI", sans-serif;
+	background: radial-gradient(circle at top left, #000000 0, #000000 32%, #000000 100%);
+	color: #ffffff;
+}
+
+.page-shell {
+	height: 100vh;
+	height: 100svh;
+	display: grid;
+	grid-template-columns: 240px minmax(0, 1fr);
+	grid-template-rows: calc(100svh / 6) calc((100svh * 29) / 42) calc(100svh / 7);
+	grid-template-areas:
+		"hero hero"
+		"sidebar feature"
+		"intro intro";
+	background: #ffffff;
+	overflow: hidden;
+}
+
+.sidebar {
+	grid-area: sidebar;
+	color: #ffffff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0;
+	padding: 0.85rem 1.4rem;
+	margin-left: 2vw;
+	background: #000000;
+	position: relative;
+	overflow: hidden;
+}
+
+.sidebar::before,
+.sidebar::after {
+	content: "";
+	position: absolute;
+	top: 0.45rem;
+	bottom: 0.45rem;
+	width: 0.7rem;
+	background: repeating-linear-gradient(
+		to bottom,
+		rgba(240, 236, 228, 0.95) 0 0.8rem,
+		transparent 0.8rem 1.42rem
+	);
+	border-radius: 0.15rem;
+}
+
+.sidebar::before {
+	left: 0.32rem;
+}
+
+.sidebar::after {
+	right: 0.32rem;
+}
+
+.sidebar-nav {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: center;
+	justify-content: stretch;
+	width: 100%;
+	height: 100%;
+	min-height: 0;
+	flex: 1 1 auto;
+	position: relative;
+	z-index: 1;
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+
+.sidebar-nav a {
+	color: #000000;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 0.14rem;
+	font-size: 0.75rem;
+	font-weight: 700;
+	transition: transform 0.2s ease, background-color 0.2s ease;
+	background: #ffffff;
+	border-radius: 0.8rem;
+	min-height: clamp(54px, 8vh, 84px);
+	padding: 1rem 0.75rem;
+	width: 100%;
+	max-width: 152px;
+	flex: 1 1 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-height: 760px) {
+	.sidebar {
+		padding-top: 0.45rem;
+		padding-bottom: 0.45rem;
+	}
+
+	.sidebar-nav {
+		gap: 0.6rem;
+	}
+
+	.sidebar-nav a {
+		padding: 0.65rem 0.6rem;
+		font-size: 0.68rem;
+		letter-spacing: 0.11rem;
+		min-height: 46px;
+	}
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a:focus-visible,
+.sidebar-nav a.active {
+	background: #d8d8d8;
+	transform: scale(1.02);
+}
+
+.hero-header,
+.intro-panel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 1.5rem;
+}
+
+.hero-header {
+	grid-area: hero;
+	background: #000000;
+}
+
+.hero-header h1 {
+	margin: 0;
+	font-size: clamp(2.4rem, 4vw, 4rem);
+	font-weight: 500;
+	letter-spacing: 0.04em;
+}
+
+.feature-panel {
+	grid-area: feature;
+	background:
+		radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.85) 0, rgba(255, 255, 255, 0) 24%),
+		linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+	display: flex;
+	align-items: stretch;
+	justify-content: center;
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 100%;
+	height: 100%;
+	padding: 0.9rem;
+}
+
+
+.feature-panel img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	object-position: center;
+	display: block;
+}
+
+.video-grid {
+	width: min(100%, 980px);
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	column-gap: clamp(0.8rem, 1.3vw, 1.35rem);
+	row-gap: clamp(10rem, 28vh, 22rem);
+	padding: clamp(0.2rem, 0.6vw, 0.35rem) clamp(0.2rem, 0.6vw, 0.35rem) clamp(21rem, 60vh, 42rem);
+	align-content: start;
+	align-items: start;
+}
+
+.video-card {
+	position: relative;
+	width: 100%;
+	max-width: 430px;
+	justify-self: center;
+	aspect-ratio: 16 / 9;
+	background: #000000;
+	border-radius: 0.8rem;
+	overflow: hidden;
+}
+
+.video-card iframe {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	display: block;
+}
+
+.video-grid > .video-card:last-child:nth-child(odd) {
+	grid-column: 1 / -1;
+	width: 100%;
+	max-width: 430px;
+	justify-self: center;
+}
+
+.intro-panel {
+	grid-area: intro;
+	background: #000000;
+	color: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: clamp(0.45rem, 1.2vh, 0.9rem) 1rem;
+}
+
+.intro-panel p {
+	margin: 0;
+	max-width: min(78vw, 46rem);
+	padding: 0 0.75rem;
+	text-align: center;
+	font-size: clamp(0.95rem, 0.6rem + 1.5vw, 1.8rem);
+	font-weight: 400;
+	line-height: 1.15;
+}
+
+@media (max-width: 900px) {
+	.page-shell {
+		grid-template-columns: 1fr;
+		grid-template-rows: calc(100svh / 6) auto minmax(0, 1fr) calc(100svh / 7);
+		grid-template-areas:
+			"hero"
+			"sidebar"
+			"feature"
+			"intro";
+		height: 100vh;
+		height: 100svh;
+		overflow: hidden;
+	}
+
+	.sidebar {
+		flex-direction: row;
+		justify-content: space-between;
+		gap: 1.5rem;
+		padding: 1.25rem 1rem;
+		margin-left: 0;
+		min-height: auto;
+	}
+
+	.sidebar-nav {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		height: auto;
+		gap: 0.75rem;
+		overflow-y: hidden;
+	}
+
+	.sidebar-nav a {
+		min-width: 120px;
+		max-width: none;
+		flex: 0 1 auto;
+		padding: 0.9rem 0.75rem;
+		min-height: 54px;
+	}
+
+	.sidebar::before,
+	.sidebar::after {
+		display: none;
+	}
+
+	.intro-panel {
+		display: flex;
+		padding: clamp(0.4rem, 1vh, 0.8rem) 0.85rem;
+	}
+
+	.intro-panel p {
+		font-size: clamp(0.88rem, 0.72rem + 1vw, 1.15rem);
+		padding: 0;
+	}
+}
+
+@media (max-width: 560px) {
+	.sidebar {
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.sidebar-nav {
+		justify-content: center;
+		width: 100%;
+	}
+
+	.hero-header h1 {
+		font-size: 2rem;
+	}
+
+	.intro-panel p {
+		font-size: clamp(0.82rem, 0.74rem + 0.7vw, 1rem);
+	}
+
+	.feature-panel {
+		padding: 0.5rem;
+	}
+
+	.video-grid {
+		grid-template-columns: 1fr;
+		column-gap: clamp(0.6rem, 2vw, 0.9rem);
+		row-gap: clamp(9rem, 22vh, 14rem);
+		padding: clamp(0.15rem, 0.5vw, 0.25rem) clamp(0.15rem, 0.5vw, 0.25rem) clamp(18rem, 48vh, 30rem);
+	}
+
+	.feature-panel img {
+		border-radius: 0.8rem;
+	}
+
+	.feature-panel iframe {
+		border-radius: 0.8rem;
+	}
+}
