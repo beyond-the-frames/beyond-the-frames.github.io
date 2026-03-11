@@ -4,8 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photos - Beyond The Frames</title>
+    <link rel="stylesheet" href="static/photo.css">
 </head>
 <body>
-    photos heere
+    <div class="page-shell">
+        <header class="hero-header">
+            <h1>Beyond The Frames</h1>
+        </header>
+
+        <aside class="sidebar">
+            <nav class="sidebar-nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="photo_portfolio_home.html" class="active">Photos</a>
+                <a href="video_portfolio.html">Video</a>
+            </nav>
+        </aside>
+
+        <section class="feature-panel" aria-label="Photo gallery">
+            <div class="gallery-shell">
+                <div class="gallery-topbar">
+                    <h2 id="galleryTitle">Photos</h2>
+                    <div id="categoryToolbar" class="category-toolbar" aria-label="Photo categories"></div>
+                </div>
+                <div id="photoGrid" class="photo-grid" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section class="intro-panel">
+            <p id="gallerySummary">Loading category photos.</p>
+        </section>
+    </div>
+
+    <script src="static/photo-data.js"></script>
+    <script>
+        const toolbar = document.getElementById("categoryToolbar");
+        const grid = document.getElementById("photoGrid");
+        const title = document.getElementById("galleryTitle");
+        const summary = document.getElementById("gallerySummary");
+
+        async function initPhotoPortfolio() {
+            try {
+                const photoCatalog = await window.loadPhotoCatalog();
+                const params = new URLSearchParams(window.location.search);
+                const requestedCategory = (params.get("category") || "").trim();
+                const categories = Object.keys(photoCatalog);
+
+                const activeCategory =
+                    categories.find((name) => name.toLowerCase() === requestedCategory.toLowerCase()) || categories[0] || "";
+                const photos = photoCatalog[activeCategory] || [];
+
+                title.textContent = activeCategory ? activeCategory + " Photos" : "Photos";
+                summary.textContent = activeCategory
+                    ? "Showing " + photos.length + " photo" + (photos.length === 1 ? "" : "s") + " from " + activeCategory + "."
+                    : "No categories available.";
+
+                categories.forEach((categoryName) => {
+                    const link = document.createElement("a");
+                    link.href = "photo_portfolio.html?category=" + encodeURIComponent(categoryName);
+                    link.textContent = categoryName;
+
+                    if (categoryName === activeCategory) {
+                        link.classList.add("active");
+                        link.setAttribute("aria-current", "page");
+                    }
+
+                    toolbar.appendChild(link);
+                });
+
+                photos.forEach((fileName) => {
+                    const card = document.createElement("article");
+                    card.className = "photo-card";
+
+                    const image = document.createElement("img");
+                    image.loading = "lazy";
+                    image.src = "static/media/" + encodeURIComponent(activeCategory) + "/" + encodeURIComponent(fileName);
+                    image.alt = activeCategory + " photo: " + fileName;
+
+                    card.appendChild(image);
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                title.textContent = "Photos";
+                summary.textContent = "Unable to load photos right now.";
+                console.error(error);
+            }
+        }
+
+        initPhotoPortfolio();
+    </script>
 </body>
 </html>

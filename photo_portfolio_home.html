@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Categories - Beyond The Frames</title>
+    <link rel="stylesheet" href="static/photo.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="hero-header">
+            <h1>Beyond The Frames</h1>
+        </header>
+
+        <aside class="sidebar">
+            <nav class="sidebar-nav" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="photo_portfolio_home.html" class="active">Photos</a>
+                <a href="video_portfolio.html">Video</a>
+            </nav>
+        </aside>
+
+        <section class="feature-panel" aria-label="Photo category highlights">
+            <div id="categoryGrid" class="category-grid" aria-live="polite"></div>
+        </section>
+
+        <section class="intro-panel">
+            <p>
+                Choose a folder category to open that collection in the photo gallery.
+            </p>
+        </section>
+    </div>
+
+    <script src="static/photo-data.js"></script>
+    <script>
+        const categoryGrid = document.getElementById("categoryGrid");
+
+        async function initCategoryHome() {
+            try {
+                const photoCatalog = await window.loadPhotoCatalog();
+                const categories = Object.keys(photoCatalog).sort((a, b) => a.localeCompare(b));
+
+                categories.forEach((categoryName) => {
+                    const photos = photoCatalog[categoryName] || [];
+                    if (photos.length === 0) {
+                        return;
+                    }
+
+                    const firstImage = photos[0];
+                    const card = document.createElement("a");
+                    card.className = "category-card";
+                    card.href = "photo_portfolio.html?category=" + encodeURIComponent(categoryName);
+                    card.setAttribute("aria-label", "Open " + categoryName + " photos");
+
+                    const image = document.createElement("img");
+                    image.loading = "lazy";
+                    image.src = "static/media/" + encodeURIComponent(categoryName) + "/" + encodeURIComponent(firstImage);
+                    image.alt = categoryName + " highlight image";
+
+                    const label = document.createElement("span");
+                    label.textContent = categoryName;
+
+                    card.appendChild(image);
+                    card.appendChild(label);
+                    categoryGrid.appendChild(card);
+                });
+            } catch (error) {
+                categoryGrid.innerHTML = "";
+                const message = document.createElement("p");
+                message.textContent = "Unable to load categories right now.";
+                message.style.color = "#000000";
+                categoryGrid.appendChild(message);
+                console.error(error);
+            }
+        }
+
+        initCategoryHome();
+    </script>
+</body>
+</html>
