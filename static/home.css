@@ -5,7 +5,9 @@
 html,
 body {
 	margin: 0;
-	min-height: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 body {
@@ -15,15 +17,17 @@ body {
 }
 
 .page-shell {
-	min-height: 100vh;
+	height: 100vh;
+	height: 100svh;
 	display: grid;
 	grid-template-columns: 240px minmax(0, 1fr);
-	grid-template-rows: 195px minmax(320px, 1fr) 190px;
+	grid-template-rows: calc(100svh / 6) calc((100svh * 29) / 42) calc(100svh / 7);
 	grid-template-areas:
 		"hero hero"
 		"sidebar feature"
 		"intro intro";
 	background: #ffffff;
+	overflow: hidden;
 }
 
 .sidebar {
@@ -34,7 +38,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	gap: 0;
-	padding: 1.1rem 1.4rem;
+	padding: 0.85rem 1.4rem;
 	margin-left: 2vw;
 	background: #000000;
 	position: relative;
@@ -45,8 +49,8 @@ body {
 .sidebar::after {
 	content: "";
 	position: absolute;
-	top: 0.8rem;
-	bottom: 0.8rem;
+	top: 0.45rem;
+	bottom: 0.45rem;
 	width: 0.7rem;
 	background: repeating-linear-gradient(
 		to bottom,
@@ -75,6 +79,8 @@ body {
 	flex: 1 1 auto;
 	position: relative;
 	z-index: 1;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .sidebar-nav a {
@@ -87,7 +93,7 @@ body {
 	transition: transform 0.2s ease, background-color 0.2s ease;
 	background: #ffffff;
 	border-radius: 0.8rem;
-	min-height: 84px;
+	min-height: clamp(54px, 8vh, 84px);
 	padding: 1rem 0.75rem;
 	width: 100%;
 	max-width: 152px;
@@ -97,6 +103,24 @@ body {
 	justify-content: center;
 	text-align: center;
 	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-height: 760px) {
+	.sidebar {
+		padding-top: 0.45rem;
+		padding-bottom: 0.45rem;
+	}
+
+	.sidebar-nav {
+		gap: 0.6rem;
+	}
+
+	.sidebar-nav a {
+		padding: 0.65rem 0.6rem;
+		font-size: 0.68rem;
+		letter-spacing: 0.11rem;
+		min-height: 46px;
+	}
 }
 
 .sidebar-nav a:hover,
@@ -136,6 +160,8 @@ body {
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
+	width: 100%;
+	height: 100%;
 	padding: 0;
 }
 
@@ -143,7 +169,8 @@ body {
 .feature-panel img {
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	object-fit: contain;
+	object-position: center;
 	display: block;
 }
 
@@ -154,28 +181,39 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 2rem 1.5rem 2.5rem;
+	padding: clamp(0.45rem, 1.2vh, 0.9rem) 1rem;
 }
 
 .intro-panel p {
 	margin: 0;
-	max-width: 30rem;
-	padding: 0 1.5rem;
+	max-width: min(78vw, 46rem);
+	padding: 0 0.75rem;
 	text-align: center;
-	font-size: clamp(1.5rem, 2.2vw, 2.75rem);
+	font-size: clamp(0.95rem, 0.6rem + 1.5vw, 1.8rem);
 	font-weight: 400;
-	line-height: 1.2;
+	line-height: 1.15;
 }
 
 @media (max-width: 900px) {
+	html,
+	body {
+		height: auto;
+		min-height: 100%;
+		overflow-y: auto;
+	}
+
 	.page-shell {
 		grid-template-columns: 1fr;
-		grid-template-rows: auto auto minmax(260px, 44vh) auto;
+		grid-template-rows: minmax(calc(100svh / 6), auto) minmax(86px, auto) minmax(calc((100svh * 29) / 42), auto) minmax(calc(100svh / 7), auto);
 		grid-template-areas:
 			"hero"
 			"sidebar"
 			"feature"
 			"intro";
+		min-height: 100vh;
+		min-height: 100svh;
+		height: auto;
+		overflow: visible;
 	}
 
 	.sidebar {
@@ -210,10 +248,11 @@ body {
 
 	.intro-panel {
 		display: flex;
-		padding: 2rem 1.5rem 2.5rem;
+		padding: clamp(0.4rem, 1vh, 0.8rem) 0.85rem;
 	}
 
 	.intro-panel p {
+		font-size: clamp(0.88rem, 0.72rem + 1vw, 1.15rem);
 		padding: 0;
 	}
 }
@@ -234,11 +273,11 @@ body {
 	}
 
 	.intro-panel p {
-		font-size: 1.4rem;
+		font-size: clamp(0.82rem, 0.74rem + 0.7vw, 1rem);
 	}
 
 	.feature-panel {
-		padding: 1rem;
+		padding: 0.5rem;
 	}
 
 	.feature-panel img {
