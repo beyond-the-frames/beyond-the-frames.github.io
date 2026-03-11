@@ -1,80 +1,36 @@
-(function () {
-	const IMAGE_FILE_PATTERN = /\.(png|jpe?g|gif|webp|bmp|svg|avif)$/i;
-
-	function inferGitHubRepo() {
-		const host = window.location.hostname.toLowerCase();
-		if (!host.endsWith("github.io")) {
-			return null;
-		}
-
-		const owner = host.split(".")[0];
-		const pathParts = window.location.pathname.split("/").filter(Boolean);
-		const repo = pathParts.length > 0 ? pathParts[0] : owner + ".github.io";
-
-		return { owner, repo };
-	}
-
-	function getRepoConfig() {
-		if (window.PHOTO_REPO_CONFIG && window.PHOTO_REPO_CONFIG.owner && window.PHOTO_REPO_CONFIG.repo) {
-			return {
-				owner: String(window.PHOTO_REPO_CONFIG.owner),
-				repo: String(window.PHOTO_REPO_CONFIG.repo)
-			};
-		}
-
-		const inferred = inferGitHubRepo();
-		if (inferred) {
-			return inferred;
-		}
-
-		throw new Error(
-			"Unable to infer GitHub repository from this URL. Set window.PHOTO_REPO_CONFIG = { owner: 'your-user', repo: 'your-repo' }."
-		);
-	}
-
-	async function fetchJson(url) {
-		const response = await fetch(url, {
-			headers: {
-				Accept: "application/vnd.github+json"
-			}
-		});
-
-		if (!response.ok) {
-			throw new Error("GitHub API request failed: " + response.status + " " + response.statusText);
-		}
-
-		return response.json();
-	}
-
-	function sortCaseInsensitive(values) {
-		return values.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
-	}
-
-	async function loadPhotoCatalog() {
-		const { owner, repo } = getRepoConfig();
-		const base = "https://api.github.com/repos/" + encodeURIComponent(owner) + "/" + encodeURIComponent(repo) + "/contents/";
-
-		const mediaItems = await fetchJson(base + "static/media");
-		const folderItems = mediaItems
-			.filter((item) => item && item.type === "dir")
-			.map((item) => item.name);
-
-		sortCaseInsensitive(folderItems);
-
-		const categoryEntries = await Promise.all(
-			folderItems.map(async (folderName) => {
-				const folderItemsResponse = await fetchJson(base + "static/media/" + encodeURIComponent(folderName));
-				const images = folderItemsResponse
-					.filter((item) => item && item.type === "file" && IMAGE_FILE_PATTERN.test(item.name))
-					.map((item) => item.name);
-
-				sortCaseInsensitive(images);
-				return [folderName, images];
-			})
-		);
-
-		return Object.fromEntries(categoryEntries.filter((entry) => entry[1].length > 0));
-	}
-
-	window.loadPhotoCatalog = loadPhotoCatalog;
-})();
+const PHOTO_CATALOG = {
+	Events: [
+		"act big jesus.JPG",
+		"act bigger and better.JPG",
+		"ACT Ella Selfie.JPG",
+		"act fast food.jpg",
+		"act group thing.jpg",
+		"ACT Ice Cream Group.JPG",
+		"act sleepy.PNG",
+		"act survivor.JPG",
+		"act titanic.PNG",
+		"bigger and better 2024.jpg",
+		"confirmation.JPG",
+		"early youthband.PNG",
+		"egg my yard.jpg",
+		"winter retreat.PNG",
+		"youth band group.JPG",
+		"youth band rehema.JPG"
+	],
+	Nature: [
+		"2022 winter castle night.jpg",
+		"2022 winter castle.jpg",
+		"2022 winter epcot day.jpg",
+		"2022 winter epcot night.jpg",
+		"2022 winter homer.jpg",
+		"2022 winter london.jpg",
+		"2022 winter remy.jpg",
+		"2022 winter tot.jpg",
+		"hogwarts express.jpg",
+		"jurassic park.jpg"
+	],
+    AnotherOne: [
+        "Incog.png"
+    ],
+    
+};

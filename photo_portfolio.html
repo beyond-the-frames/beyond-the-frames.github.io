@@ -38,60 +38,49 @@
 
     <script src="static/photo-data.js"></script>
     <script>
+        const params = new URLSearchParams(window.location.search);
+        const requestedCategory = (params.get("category") || "").trim();
+        const categories = Object.keys(PHOTO_CATALOG);
+
+        const activeCategory =
+            categories.find((name) => name.toLowerCase() === requestedCategory.toLowerCase()) || categories[0] || "";
+
         const toolbar = document.getElementById("categoryToolbar");
         const grid = document.getElementById("photoGrid");
         const title = document.getElementById("galleryTitle");
         const summary = document.getElementById("gallerySummary");
+        const photos = PHOTO_CATALOG[activeCategory] || [];
 
-        async function initPhotoPortfolio() {
-            try {
-                const photoCatalog = await window.loadPhotoCatalog();
-                const params = new URLSearchParams(window.location.search);
-                const requestedCategory = (params.get("category") || "").trim();
-                const categories = Object.keys(photoCatalog);
+        title.textContent = activeCategory ? activeCategory + " Photos" : "Photos";
+        summary.textContent = activeCategory
+            ? "Showing " + photos.length + " photo" + (photos.length === 1 ? "" : "s") + " from " + activeCategory + "."
+            : "No categories available.";
 
-                const activeCategory =
-                    categories.find((name) => name.toLowerCase() === requestedCategory.toLowerCase()) || categories[0] || "";
-                const photos = photoCatalog[activeCategory] || [];
+        categories.forEach((categoryName) => {
+            const link = document.createElement("a");
+            link.href = "photo_portfolio.html?category=" + encodeURIComponent(categoryName);
+            link.textContent = categoryName;
 
-                title.textContent = activeCategory ? activeCategory + " Photos" : "Photos";
-                summary.textContent = activeCategory
-                    ? "Showing " + photos.length + " photo" + (photos.length === 1 ? "" : "s") + " from " + activeCategory + "."
-                    : "No categories available.";
-
-                categories.forEach((categoryName) => {
-                    const link = document.createElement("a");
-                    link.href = "photo_portfolio.html?category=" + encodeURIComponent(categoryName);
-                    link.textContent = categoryName;
-
-                    if (categoryName === activeCategory) {
-                        link.classList.add("active");
-                        link.setAttribute("aria-current", "page");
-                    }
-
-                    toolbar.appendChild(link);
-                });
-
-                photos.forEach((fileName) => {
-                    const card = document.createElement("article");
-                    card.className = "photo-card";
-
-                    const image = document.createElement("img");
-                    image.loading = "lazy";
-                    image.src = "static/media/" + encodeURIComponent(activeCategory) + "/" + encodeURIComponent(fileName);
-                    image.alt = activeCategory + " photo: " + fileName;
-
-                    card.appendChild(image);
-                    grid.appendChild(card);
-                });
-            } catch (error) {
-                title.textContent = "Photos";
-                summary.textContent = "Unable to load photos right now.";
-                console.error(error);
+            if (categoryName === activeCategory) {
+                link.classList.add("active");
+                link.setAttribute("aria-current", "page");
             }
-        }
 
-        initPhotoPortfolio();
+            toolbar.appendChild(link);
+        });
+
+        photos.forEach((fileName) => {
+            const card = document.createElement("article");
+            card.className = "photo-card";
+
+            const image = document.createElement("img");
+            image.loading = "lazy";
+            image.src = "static/media/" + encodeURIComponent(activeCategory) + "/" + encodeURIComponent(fileName);
+            image.alt = activeCategory + " photo: " + fileName;
+
+            card.appendChild(image);
+            grid.appendChild(card);
+        });
     </script>
 </body>
 </html>

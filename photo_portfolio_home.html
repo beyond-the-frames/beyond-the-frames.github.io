@@ -35,47 +35,32 @@
     <script src="static/photo-data.js"></script>
     <script>
         const categoryGrid = document.getElementById("categoryGrid");
+        const categories = Object.keys(PHOTO_CATALOG).sort((a, b) => a.localeCompare(b));
 
-        async function initCategoryHome() {
-            try {
-                const photoCatalog = await window.loadPhotoCatalog();
-                const categories = Object.keys(photoCatalog).sort((a, b) => a.localeCompare(b));
-
-                categories.forEach((categoryName) => {
-                    const photos = photoCatalog[categoryName] || [];
-                    if (photos.length === 0) {
-                        return;
-                    }
-
-                    const firstImage = photos[0];
-                    const card = document.createElement("a");
-                    card.className = "category-card";
-                    card.href = "photo_portfolio.html?category=" + encodeURIComponent(categoryName);
-                    card.setAttribute("aria-label", "Open " + categoryName + " photos");
-
-                    const image = document.createElement("img");
-                    image.loading = "lazy";
-                    image.src = "static/media/" + encodeURIComponent(categoryName) + "/" + encodeURIComponent(firstImage);
-                    image.alt = categoryName + " highlight image";
-
-                    const label = document.createElement("span");
-                    label.textContent = categoryName;
-
-                    card.appendChild(image);
-                    card.appendChild(label);
-                    categoryGrid.appendChild(card);
-                });
-            } catch (error) {
-                categoryGrid.innerHTML = "";
-                const message = document.createElement("p");
-                message.textContent = "Unable to load categories right now.";
-                message.style.color = "#000000";
-                categoryGrid.appendChild(message);
-                console.error(error);
+        categories.forEach((categoryName) => {
+            const photos = PHOTO_CATALOG[categoryName] || [];
+            if (photos.length === 0) {
+                return;
             }
-        }
 
-        initCategoryHome();
+            const firstImage = photos[0];
+            const card = document.createElement("a");
+            card.className = "category-card";
+            card.href = "photo_portfolio.html?category=" + encodeURIComponent(categoryName);
+            card.setAttribute("aria-label", "Open " + categoryName + " photos");
+
+            const image = document.createElement("img");
+            image.loading = "lazy";
+            image.src = "static/media/" + encodeURIComponent(categoryName) + "/" + encodeURIComponent(firstImage);
+            image.alt = categoryName + " highlight image";
+
+            const label = document.createElement("span");
+            label.textContent = categoryName;
+
+            card.appendChild(image);
+            card.appendChild(label);
+            categoryGrid.appendChild(card);
+        });
     </script>
 </body>
 </html>
