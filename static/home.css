@@ -1,0 +1,233 @@
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	min-height: 100%;
+}
+
+body {
+	font-family: "Manrope", "Segoe UI", sans-serif;
+	background: radial-gradient(circle at top left, #1f1f1f 0, #0e0e0e 32%, #050505 100%);
+	color: #ffffff;
+}
+
+.page-shell {
+	min-height: 100vh;
+	display: grid;
+	grid-template-columns: 240px minmax(0, 1fr);
+	grid-template-rows: 195px minmax(320px, 1fr) 190px;
+	grid-template-areas:
+		"hero hero"
+		"sidebar feature"
+		". intro";
+	background: #050505;
+}
+
+.sidebar {
+	grid-area: sidebar;
+	color: #f5f5f5;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0;
+	padding: 1.1rem 1.4rem;
+	background: #111111;
+	position: relative;
+	overflow: hidden;
+}
+
+.sidebar::before,
+.sidebar::after {
+	content: "";
+	position: absolute;
+	top: 0.8rem;
+	bottom: 0.8rem;
+	width: 0.7rem;
+	background: repeating-linear-gradient(
+		to bottom,
+		rgba(240, 236, 228, 0.95) 0 0.8rem,
+		transparent 0.8rem 1.42rem
+	);
+	border-radius: 0.15rem;
+}
+
+.sidebar::before {
+	left: 0.32rem;
+}
+
+.sidebar::after {
+	right: 0.32rem;
+}
+
+.sidebar-nav {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: center;
+	justify-content: stretch;
+	width: 100%;
+	height: 100%;
+	flex: 1 1 auto;
+	position: relative;
+	z-index: 1;
+}
+
+.sidebar-nav a {
+	color: #151515;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 0.14rem;
+	font-size: 0.75rem;
+	font-weight: 700;
+	transition: transform 0.2s ease, background-color 0.2s ease;
+	background: #f3f3f3;
+	border-radius: 0.8rem;
+	min-height: 84px;
+	padding: 1rem 0.75rem;
+	width: 100%;
+	max-width: 152px;
+	flex: 1 1 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a:focus-visible,
+.sidebar-nav a.active {
+	background: #d8d8d8;
+	transform: scale(1.02);
+}
+
+.hero-header,
+.intro-panel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 1.5rem;
+}
+
+.hero-header {
+	grid-area: hero;
+	background: #000000;
+}
+
+.hero-header h1 {
+	margin: 0;
+	font-size: clamp(2.4rem, 4vw, 4rem);
+	font-weight: 500;
+	letter-spacing: 0.04em;
+}
+
+.feature-panel {
+	grid-area: feature;
+	background:
+		radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.85) 0, rgba(255, 255, 255, 0) 24%),
+		linear-gradient(135deg, #f5f2ea 0%, #ebe7de 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	padding: 0;
+}
+
+
+.feature-panel img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.intro-panel {
+	grid-area: intro;
+	background: #000000;
+	align-items: flex-start;
+	justify-content: center;
+	text-align: center;
+	padding: 2rem 1.5rem 2.5rem;
+}
+
+.intro-panel p {
+	margin: 0;
+	max-width: 30rem;
+	font-size: clamp(1.5rem, 2.2vw, 2.75rem);
+	font-weight: 400;
+	line-height: 1.2;
+}
+
+@media (max-width: 900px) {
+	.page-shell {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto auto minmax(260px, 44vh) auto;
+		grid-template-areas:
+			"hero"
+			"sidebar"
+			"feature"
+			"intro";
+	}
+
+	.sidebar {
+		flex-direction: row;
+		justify-content: space-between;
+		gap: 1.5rem;
+		padding: 1.25rem 1rem;
+		min-height: auto;
+	}
+
+	.sidebar-nav {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		height: auto;
+		gap: 0.75rem;
+	}
+
+	.sidebar-nav a {
+		min-width: 120px;
+		max-width: none;
+		flex: 0 1 auto;
+		padding: 0.9rem 0.75rem;
+		min-height: 54px;
+	}
+
+	.sidebar::before,
+	.sidebar::after {
+		display: none;
+	}
+}
+
+@media (max-width: 560px) {
+	.sidebar {
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.sidebar-nav {
+		justify-content: center;
+		width: 100%;
+	}
+
+	.hero-header h1 {
+		font-size: 2rem;
+	}
+
+	.intro-panel p {
+		font-size: 1.4rem;
+	}
+
+	.feature-panel {
+		padding: 1rem;
+	}
+
+	.feature-panel img {
+		border-radius: 0.8rem;
+	}
+}
