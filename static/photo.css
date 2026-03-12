@@ -288,15 +288,43 @@ body {
 	z-index: 1;
 	width: min(90%, 980px);
 	max-height: calc(100% - clamp(1.2rem, 3vh, 2.6rem));
-	background: #ffffff;
-	border-radius: 1rem;
-	box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+	background: #000000;
+	border-radius: 1.2rem;
+	box-shadow:
+		0 24px 60px rgba(0, 0, 0, 0.32),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 	display: grid;
 	grid-template-rows: minmax(0, 1fr) auto;
 	overflow: hidden;
 	transform: translateY(12px) scale(0.98);
 	opacity: 0;
 	transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.photo-modal-card::before,
+.photo-modal-card::after {
+	content: "";
+	position: absolute;
+	top: 0.45rem;
+	bottom: 0.45rem;
+	width: 0.7rem;
+	background: repeating-linear-gradient(
+		to bottom,
+		rgba(240, 236, 228, 0.95) 0 0.8rem,
+		transparent 0.8rem 1.42rem
+	);
+	border-radius: 0.15rem;
+	opacity: 0.95;
+	z-index: 2;
+	pointer-events: none;
+}
+
+.photo-modal-card::before {
+	left: 0.32rem;
+}
+
+.photo-modal-card::after {
+	right: 0.32rem;
 }
 
 .photo-modal-close {
@@ -319,12 +347,14 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: clamp(0.8rem, 2vw, 1.4rem);
+	padding: clamp(0.8rem, 2vw, 1.4rem) clamp(2.2rem, 3.6vw, 2.9rem);
 }
 
 .photo-modal-media img {
 	max-width: 100%;
 	max-height: 100%;
+	width: auto;
+	height: auto;
 	object-fit: contain;
 	border-radius: 0.75rem;
 }
