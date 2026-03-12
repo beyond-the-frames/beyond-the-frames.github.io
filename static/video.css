@@ -165,6 +165,7 @@ body {
 	width: 100%;
 	height: 100%;
 	padding: 0.9rem;
+	padding-bottom: 2.5rem;
 }
 
 
@@ -178,12 +179,13 @@ body {
 
 .video-grid {
 	width: min(100%, 980px);
-	margin: 0 auto;
+	margin: 0 auto clamp(2.5rem, 10vh, 7rem);
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	column-gap: clamp(0.8rem, 1.3vw, 1.35rem);
-	row-gap: clamp(10rem, 28vh, 22rem);
-	padding: clamp(0.2rem, 0.6vw, 0.35rem) clamp(0.2rem, 0.6vw, 0.35rem) clamp(21rem, 60vh, 42rem);
+	row-gap: clamp(4.5rem, 14vh, 16rem);
+	grid-auto-rows: max-content;
+	padding: clamp(0.2rem, 0.7vw, 0.55rem) clamp(0.2rem, 0.7vw, 0.55rem) clamp(4rem, 16vh, 14rem);
 	align-content: start;
 	align-items: start;
 }
@@ -191,7 +193,7 @@ body {
 .video-card {
 	position: relative;
 	width: 100%;
-	max-width: 430px;
+	max-width: clamp(280px, 38vw, 430px);
 	justify-self: center;
 	aspect-ratio: 16 / 9;
 	background: #000000;
@@ -209,7 +211,7 @@ body {
 .video-grid > .video-card:last-child:nth-child(odd) {
 	grid-column: 1 / -1;
 	width: 100%;
-	max-width: 430px;
+	max-width: clamp(280px, 38vw, 430px);
 	justify-self: center;
 }
 
@@ -315,8 +317,9 @@ body {
 	.video-grid {
 		grid-template-columns: 1fr;
 		column-gap: clamp(0.6rem, 2vw, 0.9rem);
-		row-gap: clamp(9rem, 22vh, 14rem);
-		padding: clamp(0.15rem, 0.5vw, 0.25rem) clamp(0.15rem, 0.5vw, 0.25rem) clamp(18rem, 48vh, 30rem);
+		row-gap: clamp(3.5rem, 13vh, 12rem);
+		grid-auto-rows: max-content;
+		padding: clamp(0.15rem, 0.5vw, 0.35rem) clamp(0.15rem, 0.5vw, 0.35rem) clamp(3rem, 12vh, 10rem);
 	}
 
 	.feature-panel img {
@@ -325,5 +328,12 @@ body {
 
 	.feature-panel iframe {
 		border-radius: 0.8rem;
+	}
+}
+
+@media (max-height: 800px) {
+	.video-grid {
+		row-gap: clamp(3rem, 11vh, 10rem);
+		padding-bottom: clamp(3rem, 12vh, 10rem);
 	}
 }
