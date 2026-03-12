@@ -29,21 +29,21 @@
                 </div>
                 <div id="photoGrid" class="photo-grid" aria-live="polite"></div>
             </div>
-            <div id="photoModal" class="photo-modal" aria-hidden="true">
-                <div class="photo-modal-backdrop" data-close></div>
-                <div class="photo-modal-card" role="dialog" aria-modal="true" aria-labelledby="photoModalTitle">
-                    <button class="photo-modal-close" type="button" aria-label="Close photo" data-close>×</button>
-                    <div class="photo-modal-media">
-                        <img id="photoModalImage" alt="">
-                    </div>
-                    <div class="photo-modal-caption" id="photoModalTitle"></div>
-                </div>
-            </div>
         </section>
 
         <section class="intro-panel">
             <p id="gallerySummary">Loading category photos.</p>
         </section>
+    </div>
+
+    <div id="photoModal" class="photo-modal" aria-hidden="true">
+        <div class="photo-modal-backdrop" data-close></div>
+        <div class="photo-modal-card" role="dialog" aria-modal="true" aria-labelledby="photoModalTitle">
+            <button class="photo-modal-close" type="button" aria-label="Close photo" data-close>×</button>
+            <div class="photo-modal-media">
+                <img id="photoModalImage" alt="">
+            </div>
+        </div>
     </div>
 
     <script src="static/photo-data.js"></script>
@@ -61,7 +61,6 @@
         const summary = document.getElementById("gallerySummary");
         const modal = document.getElementById("photoModal");
         const modalImage = document.getElementById("photoModalImage");
-        const modalTitle = document.getElementById("photoModalTitle");
         const featurePanel = document.querySelector(".feature-panel");
         const photos = PHOTO_CATALOG[activeCategory] || [];
 
@@ -98,7 +97,6 @@
             card.addEventListener("click", () => {
                 modalImage.src = image.src;
                 modalImage.alt = image.alt;
-                modalTitle.textContent = image.alt;
                 modal.classList.add("is-open");
                 modal.setAttribute("aria-hidden", "false");
                 featurePanel.classList.add("modal-open");
