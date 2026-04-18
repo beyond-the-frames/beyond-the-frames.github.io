@@ -1,21 +1,12 @@
 const PHOTO_CATALOG = {
 	Events: [
-		"act big jesus.JPG",
-		"act bigger and better.JPG",
-		"ACT Ella Selfie.JPG",
-		"act fast food.jpg",
-		"act group thing.jpg",
-		"ACT Ice Cream Group.JPG",
-		"act sleepy.PNG",
-		"act survivor.JPG",
-		"act titanic.PNG",
-		"bigger and better 2024.jpg",
-		"confirmation.JPG",
-		"early youthband.PNG",
-		"egg my yard.jpg",
-		"winter retreat.PNG",
-		"youth band group.JPG",
-		"youth band rehema.JPG"
+		"Capitol-2.jpg",
+		"Capitol-7-1.jpg",
+		"Capitol-7.jpg",
+		"Event-3.jpg",
+		"Event-4.jpg",
+		"Event-5.jpg",
+		"Event-6.jpg"
 	],
 	Nature: [
 		"2022 winter castle night.jpg",

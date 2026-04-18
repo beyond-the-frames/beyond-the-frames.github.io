@@ -59,7 +59,6 @@ body {
 	);
 	border-radius: 0.15rem;
 }
-
 .sidebar::before {
 	left: 0.32rem;
 }
@@ -147,7 +146,6 @@ body {
 	width: 100%;
 	height: 100%;
 	padding: 0.9rem;
-	position: relative;
 }
 
 .gallery-shell {
@@ -155,6 +153,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+	align-items: stretch;
 	align-self: flex-start;
 }
 
@@ -245,127 +244,22 @@ body {
 
 .photo-grid {
 	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 0.9rem;
-	padding-bottom: 1.2rem;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	column-gap: clamp(0.8rem, 1.3vw, 1.35rem);
+	row-gap: clamp(0.8rem, 1.2vw, 1.1rem);
+	padding: 0.2rem 0.2rem 1.2rem;
+	align-content: start;
 }
-
-.feature-panel.modal-open {
-	overflow: hidden;
-}
-
-.photo-modal {
-	position: fixed;
-	top: calc(100svh / 6);
-	bottom: calc(100svh / 7);
-	left: 240px;
-	right: 0;
-	display: none;
-	align-items: center;
-	justify-content: center;
-	padding: clamp(1rem, 2.6vw, 2rem);
-	z-index: 10;
-}
-
-.photo-modal.is-open {
-	display: flex;
-}
-
-.photo-modal.is-open .photo-modal-card {
-	transform: translateY(0) scale(1);
-	opacity: 1;
-}
-
-.photo-modal-backdrop {
-	position: absolute;
-	inset: 0;
-	background: rgba(12, 12, 12, 0.55);
-	backdrop-filter: blur(2px);
-}
-
-.photo-modal-card {
-	position: relative;
-	z-index: 1;
-	width: min(90%, 980px);
-	max-height: calc(100% - clamp(1.2rem, 3vh, 2.6rem));
-	background: #000000;
-	border-radius: 1.2rem;
-	box-shadow:
-		0 24px 60px rgba(0, 0, 0, 0.32),
-		inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-	display: grid;
-	grid-template-rows: minmax(0, 1fr) auto;
-	overflow: hidden;
-	transform: translateY(12px) scale(0.98);
-	opacity: 0;
-	transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.photo-modal-card::before,
-.photo-modal-card::after {
-	content: "";
-	position: absolute;
-	top: 0.45rem;
-	bottom: 0.45rem;
-	width: 0.7rem;
-	background: repeating-linear-gradient(
-		to bottom,
-		rgba(240, 236, 228, 0.95) 0 0.8rem,
-		transparent 0.8rem 1.42rem
-	);
-	border-radius: 0.15rem;
-	opacity: 0.95;
-	z-index: 2;
-	pointer-events: none;
-}
-
-.photo-modal-card::before {
-	left: 0.32rem;
-}
-
-.photo-modal-card::after {
-	right: 0.32rem;
-}
-
-.photo-modal-close {
-	position: absolute;
-	top: 0.75rem;
-	right: 0.75rem;
-	border: 0;
-	width: 2.5rem;
-	height: 2.5rem;
-	border-radius: 999px;
-	background: rgba(0, 0, 0, 0.7);
-	color: #ffffff;
-	font-size: 1.4rem;
-	line-height: 1;
-	cursor: pointer;
-}
-
-.photo-modal-media {
-	background: #000000;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: clamp(0.8rem, 2vw, 1.4rem) clamp(2.2rem, 3.6vw, 2.9rem);
-}
-
-.photo-modal-media img {
-	max-width: 100%;
-	max-height: 100%;
-	width: auto;
-	height: auto;
-	object-fit: contain;
-	border-radius: 0.75rem;
-}
-
 
 .photo-card {
+	position: relative;
+	width: 100%;
+	max-width: 430px;
+	justify-self: center;
 	border-radius: 0.8rem;
 	overflow: hidden;
-	background: #f2f2f2;
+	background: #000000;
 	aspect-ratio: 4 / 3;
-	cursor: pointer;
 }
 
 .photo-card img {
@@ -373,6 +267,7 @@ body {
 	height: 100%;
 	object-fit: cover;
 	display: block;
+	transition: transform 0.28s ease, filter 0.28s ease;
 }
 
 .intro-panel {
@@ -396,10 +291,6 @@ body {
 }
 
 @media (max-width: 900px) {
-	.photo-modal {
-		left: 0;
-	}
-
 	.page-shell {
 		grid-template-columns: 1fr;
 		grid-template-rows: calc(100svh / 6) auto minmax(0, 1fr) calc(100svh / 7);
@@ -449,7 +340,7 @@ body {
 	}
 
 	.photo-grid {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns: 1fr;
 	}
 }
 
@@ -472,7 +363,12 @@ body {
 		padding: 0.5rem;
 	}
 
+	.gallery-topbar {
+		align-items: flex-start;
+	}
+
 	.photo-grid {
 		grid-template-columns: 1fr;
 	}
 }
+
