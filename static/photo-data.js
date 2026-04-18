@@ -9,16 +9,16 @@ const PHOTO_CATALOG = {
 		"Event-6.jpg"
 	],
 	Nature: [
-		"2022 winter castle night.jpg",
-		"2022 winter castle.jpg",
-		"2022 winter epcot day.jpg",
-		"2022 winter epcot night.jpg",
-		"2022 winter homer.jpg",
-		"2022 winter london.jpg",
-		"2022 winter remy.jpg",
-		"2022 winter tot.jpg",
-		"hogwarts express.jpg",
-		"jurassic park.jpg"
+		"S.Fall1.jpg",
+		"S.Spring1.jpg",
+		"S.Spring3.jpg",
+		"S.Summer2.jpg",
+		"S.Winter2.jpg",
+		"Tree-2.jpg",
+		"Tree-3.jpg",
+		"Tree-4.jpg",
+		"Tree-5.jpg",
+		"Tree-7.jpg"
 	],
     AnotherOne: [
         "Incog.png"
