@@ -222,7 +222,7 @@ body {
 		gap: 1.5rem;
 		padding: 1.25rem 1rem;
 		margin-left: 0;
-		min-height: auto;
+		min-height: fit-content;
 	}
 
 	.sidebar-nav {
@@ -238,7 +238,7 @@ body {
 		max-width: none;
 		flex: 0 1 auto;
 		padding: 0.9rem 0.75rem;
-		min-height: 54px;
+		min-height: 100px;
 	}
 
 	.sidebar::before,

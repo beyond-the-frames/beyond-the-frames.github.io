@@ -20,8 +20,26 @@ const PHOTO_CATALOG = {
 		"Tree-5.jpg",
 		"Tree-7.jpg"
 	],
-    AnotherOne: [
-        "Incog.png"
+    "Live Music": [
+        "Band-Xtra.jpg",
+		"Band-2.jpg",
+		"Band-3.jpg",
+		"Band-4.jpg",
+		"Band-5.jpg",
+		"Band-6.jpg",
+		"Band-7.jpg",
+		"Band-8.jpg",
+		"Band-1.jpg",
+		"BandPhoto-1.jpg",
+		"BandPhoto-7.jpg",
+		"BandPhoto-13.jpg",
+		"BandPhoto-20.jpg",
+		"BandPhoto-24.jpg",
+		"BandPhoto-29.jpg",
+		"BandPhoto-35.jpg",
+		"BandPhoto-47.jpg",
+		"BandPhoto-59.jpg"
+
     ],
     
 };
