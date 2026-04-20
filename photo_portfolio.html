@@ -64,11 +64,13 @@
         const featurePanel = document.querySelector(".feature-panel");
         const photos = PHOTO_CATALOG[activeCategory] || [];
 
+        // Update gallery title and summary
         title.textContent = activeCategory ? activeCategory + " Photos" : "Photos";
         summary.textContent = activeCategory
-            ? "Showing " + photos.length + " photo" + (photos.length === 1 ? "" : "s") + " from " + activeCategory + "."
+            ? `Showing ${photos.length} photo${photos.length === 1 ? "" : "s"} from ${activeCategory}.`
             : "No categories available.";
 
+        // Populate category toolbar
         categories.forEach((categoryName) => {
             const link = document.createElement("a");
             link.href = "photo_portfolio.html?category=" + encodeURIComponent(categoryName);
@@ -82,40 +84,52 @@
             toolbar.appendChild(link);
         });
 
+        // Populate photo grid
         photos.forEach((fileName) => {
             const card = document.createElement("article");
             card.className = "photo-card";
 
-            const image = document.createElement("img");
-            image.loading = "lazy";
-            image.src = "static/media/" + encodeURIComponent(activeCategory) + "/" + encodeURIComponent(fileName);
-            image.alt = activeCategory + " photo: " + fileName;
+            const thumb = document.createElement("img");
+            thumb.loading = "lazy";
+            thumb.src = "static/media/" + encodeURIComponent(activeCategory) + "/" + encodeURIComponent(fileName);  // Thumbnail path
+            thumb.alt = activeCategory + " photo: " + fileName;
+            thumb.style.objectFit = "cover"; // Cropped for thumbnails only
 
-            card.appendChild(image);
+            card.appendChild(thumb);
             grid.appendChild(card);
 
+            // Open modal on click
             card.addEventListener("click", () => {
-                modalImage.src = image.src;
-                modalImage.alt = image.alt;
+                // Dynamically construct the full-size image URL
+                const fullSizeImageUrl = "static/media/" + encodeURIComponent(activeCategory) + "/" + encodeURIComponent(fileName);
+                
+                // Set the modal's image source to the full-size image
+                modalImage.src = fullSizeImageUrl;  // Full-size image URL
+                modalImage.alt = thumb.alt;         // Use the alt text of the thumbnail
+
+                // Open the modal
                 modal.classList.add("is-open");
                 modal.setAttribute("aria-hidden", "false");
                 featurePanel.classList.add("modal-open");
             });
         });
 
+        // Close modal function
         function closeModal() {
             modal.classList.remove("is-open");
             modal.setAttribute("aria-hidden", "true");
-            modalImage.src = "";
+            modalImage.src = "";  // Reset image source
             featurePanel.classList.remove("modal-open");
         }
 
+        // Close modal on backdrop or close button click
         modal.addEventListener("click", (event) => {
-            if (event.target.hasAttribute("data-close")) {
+            if (event.target.hasAttribute("data-close") || event.target === modal) {
                 closeModal();
             }
         });
 
+        // Close modal on Escape key
         window.addEventListener("keydown", (event) => {
             if (event.key === "Escape" && modal.classList.contains("is-open")) {
                 closeModal();

@@ -21,7 +21,7 @@ body {
 	height: 100svh;
 	display: grid;
 	grid-template-columns: 240px minmax(0, 1fr);
-	grid-template-rows: calc(100svh / 6) calc((100svh * 29) / 42) calc(100svh / 7);
+	grid-template-rows: 170px 1fr auto;
 	grid-template-areas:
 		"hero hero"
 		"sidebar feature"
@@ -189,16 +189,32 @@ body {
 	align-content: start;
 	align-items: start;
 }
+.video-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background: #000;
+}
+
 
 .video-card {
-	position: relative;
-	width: 100%;
-	max-width: clamp(280px, 38vw, 430px);
-	justify-self: center;
-	aspect-ratio: 16 / 9;
-	background: #000000;
-	border-radius: 0.8rem;
-	overflow: hidden;
+	 position: relative;
+  width: 100%;
+  max-width: clamp(280px, 38vw, 430px);
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* space between video and caption */
+  background: none; /* handled by wrapper */
+  border-radius: 0;
+  overflow: visible; /* allow caption to show */
+}
+.video-caption {
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+  margin: 0; /* remove default paragraph margin */
 }
 
 .video-card iframe {

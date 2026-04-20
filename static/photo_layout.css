@@ -262,6 +262,15 @@ body {
 	object-fit: cover;
 	display: block;
 }
+.img-top {
+  object-position: top center;
+}
+.img-center {
+  object-position: center center;
+}
+.img-bottom {
+  object-position: bottom center;
+}
 
 .intro-panel {
 	grid-area: intro;

@@ -2,7 +2,6 @@ const PHOTO_CATALOG = {
 	Events: [
 		"Capitol-2.jpg",
 		"Capitol-7-1.jpg",
-		"Capitol-7.jpg",
 		"Event-3.jpg",
 		"Event-4.jpg",
 		"Event-5.jpg",
@@ -24,7 +23,7 @@ const PHOTO_CATALOG = {
         "Band-Xtra.jpg",
 		"Band-2.jpg",
 		"Band-3.jpg",
-		"Band-4.jpg",
+		"Band-4.jpg", 
 		"Band-5.jpg",
 		"Band-6.jpg",
 		"Band-7.jpg",
@@ -36,8 +35,9 @@ const PHOTO_CATALOG = {
 		"BandPhoto-20.jpg",
 		"BandPhoto-24.jpg",
 		"BandPhoto-29.jpg",
-		"BandPhoto-35.jpg",
 		"BandPhoto-47.jpg",
+		"BandPhoto-35.jpg",
+		
 		"BandPhoto-59.jpg"
 
     ],
