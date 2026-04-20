@@ -213,7 +213,6 @@ body {
 	border-radius: 1rem;
 	overflow: hidden;
 	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
-	aspect-ratio: 4 / 3;
 	background: #000000;
 }
 
