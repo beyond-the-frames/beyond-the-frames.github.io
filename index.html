@@ -6,27 +6,60 @@
     <title>Beyond The Frames</title>
     <link rel="stylesheet" href="static/home.css">
 </head>
+
 <body>
     <div class="page-shell">
         <header class="hero-header">
-            <img class="logo" src="static/media/g5Final.png" alt="Logo">
-            <h1>Beyond The Frames</h1>
-        </header>
+            
+              <button class="menu-toggle">☰</button> <!-- Left side -->
+    
+    <div class="left-group">
+        <p class="welcome">Welcome</p>
+        <span class="to">to</span>
+    </div>
 
-        <aside class="sidebar">
-            <nav class="sidebar-nav" aria-label="Primary">
-                <a href="index.html" class="active">Home</a>
-                <a href="about.html">About</a>
-                <a href="photo_portfolio_home.html">Photos</a>
-                <a href="video_portfolio.html">Video</a>
-            </nav>
-        </aside>
+    <h1>Beyond The Frames</h1>
+    <img class="logo" src="static/media/g5Final.png" alt="Logo">
+</header>
 
-        <section class="feature-panel" aria-label="Featured image">
-            <img src="static/media/Tree-3.jpg" alt="Featured portfolio preview">
-        </section>
+<aside class="sidebar">
+    <nav class="sidebar-nav" aria-label="Primary">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="photo_portfolio_home.html">Photos</a>
+        <a href="video_portfolio.html">Video</a>
+    </nav>
+</aside>
 
+<section class="feature-panel" aria-label="Featured image">
+    <img src="static/media/Tree-3.jpg" alt="Featured portfolio preview">
+</section>
 
     </div>
+   <script>
+document.addEventListener('DOMContentLoaded', () => {
+   const header = document.querySelector('.hero-header');
+  const sidebar = document.querySelector('.sidebar');
+  const btn = document.querySelector(".menu-toggle");
+
+  if (!header || !sidebar || !btn) return;
+
+  function updateSidebarTop() {
+    if (window.innerWidth <= 800) { // only for small screens
+      const height = header.offsetHeight;
+      sidebar.style.top = height + "px";
+    } else {
+      sidebar.style.top = ""; // reset for wide screens
+    }
+  }
+
+  window.addEventListener('resize', updateSidebarTop);
+  updateSidebarTop();
+
+  btn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    });
+});
+</script>
 </body>
 </html>

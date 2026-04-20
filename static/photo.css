@@ -21,7 +21,7 @@ body {
 	height: 100svh;
 	display: grid;
 	grid-template-columns: 240px minmax(0, 1fr);
-	grid-template-rows: calc(100svh / 6) calc((100svh * 29) / 42) calc(100svh / 7);
+	grid-template-rows: 170px 1fr auto;
 	grid-template-areas:
 		"hero hero"
 		"sidebar feature"
