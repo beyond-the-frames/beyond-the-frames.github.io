@@ -9,7 +9,15 @@
 <body>
     <div class="page-shell">
         <header class="hero-header">
-            <h1>Beyond The Frames</h1>
+              <button class="menu-toggle">☰</button> <!-- Left side -->
+    
+    <div class="left-group">
+        <p class="welcome">Welcome</p>
+        <span class="to">to</span>
+    </div>
+
+    <h1>Beyond The Frames</h1>
+    <img class="logo" src="static/media/g5Final.png" alt="Logo">
         </header>
 
         <aside class="sidebar">
@@ -29,27 +37,53 @@
       <img src="static/media/TitleIntro.png" alt="Watch Video" style="width:100%; height:auto; border-radius:8px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
     </a>
   </div>
-  <p class="video-caption">Introductory video about our new features</p>
+  <p class="video-caption">Animated Lyric Video</p>
 </article>
             
                 <article class="video-card">
                     <div class="video-wrapper">
                         <iframe src="https://www.youtube.com/embed/ZzZuRmIdxec" title="Featured video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allowfullscreen></iframe>
                     </div>
-                    <p class="video-caption">Featured video 2</p>
+                    <p class="video-caption">Promotional Video</p>
                 </article>
                 <article class="video-card">
                     <div class="video-wrapper">
                         <iframe src="https://www.youtube.com/embed/F5W_iNAiOGc" title="Featured video 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allowfullscreen></iframe>
                     </div>
                 
-                    <p class="video-caption">Featured video 3</p>
+                    <p class="video-caption">Fictional Short</p>
                 </article>
+                
             </div>
             
         </section>
 
         
     </div>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+   const header = document.querySelector('.hero-header');
+  const sidebar = document.querySelector('.sidebar');
+  const btn = document.querySelector(".menu-toggle");
+
+  if (!header || !sidebar || !btn) return;
+
+  function updateSidebarTop() {
+    if (window.innerWidth <= 800) { // only for small screens
+      const height = header.offsetHeight;
+      sidebar.style.top = height + "px";
+    } else {
+      sidebar.style.top = ""; // reset for wide screens
+    }
+  }
+
+  window.addEventListener('resize', updateSidebarTop);
+  updateSidebarTop();
+
+  btn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    });
+});
+</script>
 </body>
 </html>

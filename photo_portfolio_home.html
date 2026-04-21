@@ -9,8 +9,17 @@
 <body>
     <div class="page-shell">
         <header class="hero-header">
-            <h1>Beyond The Frames</h1>
-        </header>
+            
+              <button class="menu-toggle">☰</button> <!-- Left side -->
+    
+    <div class="left-group">
+        <p class="welcome">Welcome</p>
+        <span class="to">to</span>
+    </div>
+
+    <h1>Beyond The Frames</h1>
+    <img class="logo" src="static/media/g5Final.png" alt="Logo">
+</header>
 
         <aside class="sidebar">
             <nav class="sidebar-nav" aria-label="Primary">
@@ -57,6 +66,29 @@
             card.appendChild(label);
             categoryGrid.appendChild(card);
         });
+        document.addEventListener('DOMContentLoaded', () => {
+   const header = document.querySelector('.hero-header');
+  const sidebar = document.querySelector('.sidebar');
+  const btn = document.querySelector(".menu-toggle");
+
+  if (!header || !sidebar || !btn) return;
+
+  function updateSidebarTop() {
+    if (window.innerWidth <= 800) { // only for small screens
+      const height = header.offsetHeight;
+      sidebar.style.top = height + "px";
+    } else {
+      sidebar.style.top = ""; // reset for wide screens
+    }
+  }
+
+  window.addEventListener('resize', updateSidebarTop);
+  updateSidebarTop();
+
+  btn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    });
+});
     </script>
 </body>
 </html>

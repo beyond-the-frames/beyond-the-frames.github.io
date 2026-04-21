@@ -11,13 +11,14 @@ const PHOTO_CATALOG = {
 		"S.Fall1.jpg",
 		"S.Spring1.jpg",
 		"S.Spring3.jpg",
-		"S.Summer2.jpg",
 		"S.Winter2.jpg",
+		"S.Summer2.jpg",
 		"Tree-2.jpg",
 		"Tree-3.jpg",
 		"Tree-4.jpg",
-		"Tree-5.jpg",
-		"Tree-7.jpg"
+		"Tree-7.jpg",
+		"Tree-5.jpg"
+		
 	],
     "Live Music": [
         "Band-Xtra.jpg",

@@ -50,11 +50,7 @@ body {
 	z-index: 2;
 	overflow: hidden;
 	
-	clip-path: repeating-linear-gradient(
-		to bottom,
-		transparent 0 0.9rem,
-		rgba(240, 236, 228, 0.95) 0.9rem 1.1rem
-	);
+	
 	
 	position: relative; /* back to grid behavior */
     top: auto;
@@ -96,7 +92,7 @@ body {
 	flex: 1 1 auto;
 	position: relative;
 	z-index: 1;
-	overflow-y: auto;
+	overflow-y: hidden;
 	overflow-x: hidden;
 	
 }
