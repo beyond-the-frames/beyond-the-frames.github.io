@@ -202,6 +202,29 @@ width: clamp(70px, 7vw, 110px);
 
 	  transform: translateY(0.7rem);
 }
+.background-content {
+	grid-area: feature;
+	background:
+		radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.85) 0, rgba(255, 255, 255, 0) 24%),
+		linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	margin-left: calc(-240px - 2vw);
+	width: calc(100% + 240px + 2vw);
+	height: 100%;
+	padding: 0;
+	position: relative;
+	z-index: 1;
+}
+.background-content img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	display: block;
+}
 .feature-panel {
 	grid-area: feature;
 	background:

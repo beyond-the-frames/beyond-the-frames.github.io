@@ -204,23 +204,49 @@ width: clamp(70px, 7vw, 110px);
 }
 .content-panel {
 	grid-area: feature;
-	background:
-		radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.95) 0, rgba(255, 255, 255, 0) 35%),
-		linear-gradient(145deg, #f8f6f2 0%, #e6e4df 60%, #ffffff 100%);
+	background:transparent;
 	display: grid;
-	grid-template-columns: minmax(0, 1fr);
+	grid-template-columns: minmax(0, .8fr);
 	gap: clamp(1.4rem, 2.6vw, 2.6rem);
 	padding: clamp(1.6rem, 3vw, 3rem);
-	overflow: auto;
+	overflow: hidden;
+	justify-content: center;
+	z-index: 2;
+	
+}
+.background-content {
+	grid-area: feature;
+	background:
+		radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.85) 0, rgba(255, 255, 255, 0) 24%),
+		linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	margin-left: calc(-240px - 2vw);
+	width: calc(100% + 240px + 2vw);
+	height: 100%;
+	padding: 0;
+	position: relative;
+	z-index: 1;
+}
+.background-content img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	display: block;
 }
 
 .about-card {
 	background: #ffffff;
 	color: #101010;
 	border-radius: 1.4rem;
-	padding: clamp(1.4rem, 2.4vw, 2.4rem);
+	padding: clamp(.5rem, 2.4vw, 2.4rem);
 	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 	border: 1px solid rgba(0, 0, 0, 0.08);
+	
+	
 }
 
 .about-card h2 {
@@ -231,9 +257,10 @@ width: clamp(70px, 7vw, 110px);
 }
 
 .about-card p {
-	margin: 0 0 1rem 0;
+	margin: .5rem .5rem 1rem 0;
 	font-size: clamp(0.95rem, 0.7rem + 0.8vw, 1.2rem);
 	line-height: 1.6;
+	
 }
 
 .about-card p:last-child {
@@ -249,6 +276,37 @@ width: clamp(70px, 7vw, 110px);
 .about-card a:focus-visible {
 	outline: 2px solid #000000;
 	outline-offset: 2px;
+}
+
+.card-container{
+	
+	display: flex;
+	flex-direction: column;
+	margin: 2rem;
+	gap: .2rem;
+	align-items: left;
+	justify-content: center;
+}
+.word-picture
+{
+	
+	display: flex;
+	grid-template-rows: .5fr 1fr;
+	gap: 1.5rem;
+	align-items: center;
+	justify-content: center;
+	margin: .25rem;
+}
+.person {
+	flex-basis: 77rem;
+position: relative;
+	width: 100%;
+	justify-self: right;
+	border-radius: 0.8rem;
+	overflow: hidden;
+	background: #000000;
+	
+
 }
 
 .intro-panel {
